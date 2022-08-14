@@ -1,0 +1,11 @@
+{
+    "production": {
+        "pylonAPI": "https://replace.me:8000/web"
+    },
+    "development": {
+        "pylonAPI": "http://localhost:8000/web"
+    },
+    "test": {
+        "pylonAPI": "http://localhost:8000/web"
+    }
+}
