@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { PylonRpc } from './api/pylon';
-import { BaseServiceClientImpl } from './proto/idl/base/base_service';
 import { auth } from 'src/firebase';
 import {
   ConfirmationResult,
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from 'firebase/auth';
-import { FirebaseError } from 'firebase/app';
+import { UserServiceClientImpl } from './proto/user/user_service';
+import { AuthType } from './proto/user/user';
+import { Button } from '@material-tailwind/react';
 
 declare global {
   interface Window {
@@ -23,18 +24,6 @@ const App: React.FC = () => {
   const [idToken, setIdToken] = useState('');
   const confirmationResult = useRef<ConfirmationResult>();
   useEffect(() => {
-    const pylonRpc = new PylonRpc();
-
-    const client = new BaseServiceClientImpl(pylonRpc);
-
-    client
-      .ping({
-        name: 'hello',
-      })
-      .then((value) => {
-        console.log(value);
-      })
-      .catch((e) => console.error(e));
     window.recaptchaVerifier = new RecaptchaVerifier(
       'recaptcha-container',
       {
@@ -44,7 +33,23 @@ const App: React.FC = () => {
     );
     auth.onIdTokenChanged((user) => {
       if (user) {
-        user.getIdToken().then((token) => setIdToken(token));
+        user.getIdToken().then((token) => {
+          setIdToken(token);
+          const pylonRpc = new PylonRpc({
+            'x-grpc-firebase-token': token,
+          });
+
+          const client = new UserServiceClientImpl(pylonRpc);
+
+          client
+            .getMyProfile({
+              authType: AuthType.FIREBASE,
+            })
+            .then((value) => {
+              console.log(value);
+            })
+            .catch((e) => console.error(e));
+        });
       }
     });
   }, []);
@@ -80,6 +85,7 @@ const App: React.FC = () => {
             setConfirmationCode(e.target.value);
           }}
         />
+        <Button>Hi</Button>
         <button
           onClick={() => {
             confirmationResult.current
@@ -88,7 +94,7 @@ const App: React.FC = () => {
                 alert('auth success');
               })
               .catch((e) => {
-                console.error('auth error');
+                console.error('auth error', e);
               });
           }}
         >

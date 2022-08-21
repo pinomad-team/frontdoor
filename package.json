@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-tailwind/react": "^1.2.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +13,7 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "firebase": "^9.9.3",
+    "protobufjs": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -24,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "update-submodules": "git submodule update --init && git submodule update --recursive --remote",
-    "proto": "protoc --proto_path=idl/ --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./src/proto ./idl/**/*.proto"
+    "proto": "protoc --proto_path=idl/ --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=esModuleInterop=true --ts_proto_out=./src/proto ./idl/**/*.proto"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +49,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
+    "autoprefixer": "^10.4.8",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
@@ -55,7 +58,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.30.1",
+    "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
     "ts-proto": "^1.121.5"
   }
 }

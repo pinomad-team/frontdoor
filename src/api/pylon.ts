@@ -14,9 +14,16 @@ interface RpcResponse {
 }
 
 export class PylonRpc implements RpcRequester {
-  private readonly pylonWebAPIClient: AxiosInstance = axios.create({
-    baseURL: config[process.env.NODE_ENV || 'development'].pylonAPI,
-  });
+  private pylonWebAPIClient: AxiosInstance;
+
+  constructor(headers?: Record<string, any>) {
+    this.pylonWebAPIClient = axios.create({
+      baseURL: config[process.env.NODE_ENV || 'development'].pylonAPI,
+      headers: {
+        ...headers,
+      },
+    });
+  }
 
   async request(
     service: string,

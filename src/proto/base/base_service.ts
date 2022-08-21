@@ -1,7 +1,7 @@
 /* eslint-disable */
-import * as _m0 from "protobufjs/minimal";
+import _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = "base";
+export const protobufPackage = 'base';
 
 export interface PingRequest {
   name: string;
@@ -12,15 +12,15 @@ export interface PingResponse {
 }
 
 function createBasePingRequest(): PingRequest {
-  return { name: "" };
+  return { name: '' };
 }
 
 export const PingRequest = {
   encode(
     message: PingRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -46,7 +46,7 @@ export const PingRequest = {
 
   fromJSON(object: any): PingRequest {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
     };
   },
 
@@ -57,24 +57,24 @@ export const PingRequest = {
   },
 
   fromPartial<I extends Exact<DeepPartial<PingRequest>, I>>(
-    object: I
+    object: I,
   ): PingRequest {
     const message = createBasePingRequest();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     return message;
   },
 };
 
 function createBasePingResponse(): PingResponse {
-  return { value: "" };
+  return { value: '' };
 }
 
 export const PingResponse = {
   encode(
     message: PingResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.value !== "") {
+    if (message.value !== '') {
       writer.uint32(10).string(message.value);
     }
     return writer;
@@ -100,7 +100,7 @@ export const PingResponse = {
 
   fromJSON(object: any): PingResponse {
     return {
-      value: isSet(object.value) ? String(object.value) : "",
+      value: isSet(object.value) ? String(object.value) : '',
     };
   },
 
@@ -111,10 +111,10 @@ export const PingResponse = {
   },
 
   fromPartial<I extends Exact<DeepPartial<PingResponse>, I>>(
-    object: I
+    object: I,
   ): PingResponse {
     const message = createBasePingResponse();
-    message.value = object.value ?? "";
+    message.value = object.value ?? '';
     return message;
   },
 };
@@ -131,7 +131,7 @@ export class BaseServiceClientImpl implements BaseService {
   }
   ping(request: PingRequest): Promise<PingResponse> {
     const data = PingRequest.encode(request).finish();
-    const promise = this.rpc.request("base.BaseService", "ping", data);
+    const promise = this.rpc.request('base.BaseService', 'ping', data);
     return promise.then((data) => PingResponse.decode(new _m0.Reader(data)));
   }
 }
@@ -140,7 +140,7 @@ interface Rpc {
   request(
     service: string,
     method: string,
-    data: Uint8Array
+    data: Uint8Array,
   ): Promise<Uint8Array>;
 }
 
