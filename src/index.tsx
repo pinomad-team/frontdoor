@@ -10,7 +10,25 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ThemeProvider
+      value={{
+        cardHeader: {
+          defaultProps: {
+            color: 'red',
+          },
+        },
+        button: {
+          defaultProps: {
+            color: 'red',
+          },
+        },
+        input: {
+          defaultProps: {
+            color: 'red',
+          },
+        },
+      }}
+    >
       <App />
     </ThemeProvider>
   </React.StrictMode>,
