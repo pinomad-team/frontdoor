@@ -28,7 +28,6 @@ export class ProfileState {
 
   constructor() {
     this.isOnboarded = false;
-    console.log(this.profile);
     makeAutoObservable(this);
   }
 
