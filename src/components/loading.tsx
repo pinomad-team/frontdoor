@@ -15,7 +15,7 @@ export const Loading: React.FC = () => (
     viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid"
   >
-    <circle cx="50" cy="23" r="13" fill="#ff5555">
+    <circle cx="50" cy="23" r="13" fill="#D43853">
       <animate
         attributeName="cy"
         dur="1s"

@@ -33,12 +33,11 @@ const PhoneNumberSignInForm: React.FC = observer(() => {
           const parsedNumber = parsePhoneNumberFromString(phoneNumber, COUNTRY);
           if (parsedNumber) {
             authState.authenticateWithPhoneNumber(parsedNumber.number);
-            authState.authStep = AuthStep.CONFIRMATION_CODE;
           }
         }
       }}
     >
-      <Card className="w-80">
+      <Card className="w-96">
         <CardHeader className="flex h-28 justify-center items-center">
           <Typography variant="h4">Pinomad Login</Typography>
         </CardHeader>
@@ -78,7 +77,7 @@ const PhoneNumberConfirmationForm: React.FC = observer(() => {
         }
       }}
     >
-      <Card className="w-80">
+      <Card className="w-96">
         <CardHeader className="flex h-28 justify-center items-center">
           <Typography variant="h4">인증번호</Typography>
         </CardHeader>

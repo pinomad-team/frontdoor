@@ -13,6 +13,10 @@ interface RpcResponse {
   response: number[];
 }
 
+export const generateFirebaseTokenHeader = (token: string) => ({
+  'x-grpc-firebase-token': token,
+});
+
 export class PylonRpc implements RpcRequester {
   private pylonWebAPIClient: AxiosInstance;
 

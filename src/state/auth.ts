@@ -30,6 +30,7 @@ export class AuthState {
     if (!isPhone(number)) {
       throw new Error('Phone number not valid');
     }
+    this.setAuthStep(AuthStep.LOADING);
     const result = await signInWithPhoneNumber(
       auth,
       number,
@@ -38,15 +39,20 @@ export class AuthState {
     runInAction(() => {
       this.confirmationResult = result;
       this.isPhoneNumberAuthPending = true;
+      this.setAuthStep(AuthStep.CONFIRMATION_CODE);
     });
   }
 
   async confirmCode(code: string): Promise<void> {
     if (this.confirmationResult) {
+      this.setAuthStep(AuthStep.LOADING);
       const confirmed = await this.confirmationResult.confirm(code);
       const token = await confirmed.user.getIdToken();
-      this.token = token;
-      this.isPhoneNumberAuthPending = false;
+      runInAction(() => {
+        this.setToken(token);
+        this.isPhoneNumberAuthPending = false;
+        this.setAuthStep(AuthStep.SIGNED_IN);
+      });
     }
   }
 
@@ -56,9 +62,17 @@ export class AuthState {
 
   async signOut(): Promise<void> {
     if (this.isAuthenticated) {
-      authState.authStep = AuthStep.LOADING;
+      this.setAuthStep(AuthStep.LOADING);
       await auth.signOut();
     }
+  }
+
+  setToken(token?: string) {
+    this.token = token;
+  }
+
+  setAuthStep(authStep: AuthStep) {
+    this.authStep = authStep;
   }
 }
 
@@ -67,10 +81,9 @@ export const authState = new AuthState();
 auth.onIdTokenChanged(async (user) => {
   if (user) {
     const token = await user.getIdToken();
-    authState.token = token;
-    console.log(token);
+    authState.setToken(token);
   } else {
-    authState.authStep = AuthStep.LOGIN;
-    authState.token = '';
+    authState.setAuthStep(AuthStep.LOGIN);
+    authState.setToken('');
   }
 });

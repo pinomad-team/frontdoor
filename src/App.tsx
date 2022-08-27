@@ -5,9 +5,7 @@ import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Auth from './pages/auth';
 import Profile from './pages/profile';
-import { BaseServiceClientImpl, PingRequest } from './proto/base/base_service';
-import { GetMyProfileRequest } from './proto/user/user_service';
-import { AuthType } from './proto/user/user';
+import { Logo } from './components/logo';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -22,6 +20,11 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+      <div className="flex justify-center">
+        <div className="w-96 p-4">
+          <Logo />
+        </div>
+      </div>
       <Routes>
         <React.Fragment>
           <Route path="/auth" element={<Auth />}></Route>
