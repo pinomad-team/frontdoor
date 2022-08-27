@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Auth from './pages/auth';
 import Profile from './pages/profile';
 import { Logo } from './components/logo';
+import Main from './pages/main';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -21,12 +22,13 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="flex justify-center">
-        <div className="w-96 p-4">
+        <div className="w-48 mt-4 absolute">
           <Logo />
         </div>
       </div>
       <Routes>
         <React.Fragment>
+          <Route path="/" element={<Main />}></Route>
           <Route path="/auth" element={<Auth />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
         </React.Fragment>

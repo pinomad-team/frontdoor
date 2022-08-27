@@ -17,7 +17,7 @@ const Profile: React.FC = observer(() => {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center gap-44">
+    <div className="flex h-screen justify-center items-center">
       <ProfileComponent></ProfileComponent>
     </div>
   );
