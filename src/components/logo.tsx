@@ -28,10 +28,10 @@ export const Logo: React.FC = () => (
           style={{
             fontStyle: 'normal',
             fontVariant: 'normal',
-            fontWeight: '900',
+            fontWeight: '800',
             fontStretch: 'normal',
             fontSize: '25.4px',
-            fontFamily: "'Arial Black'",
+            fontFamily: "'Work Sans'",
             strokeWidth: '0.265',
             strokeDasharray: 'none',
           }}
@@ -43,9 +43,9 @@ export const Logo: React.FC = () => (
             style={{
               fontStyle: 'normal',
               fontVariant: 'normal',
-              fontWeight: '900',
+              fontWeight: '800',
               fontStretch: 'normal',
-              fontFamily: "'Arial Black'",
+              fontFamily: "'Work Sans'",
               fill: '#d43853',
               fillOpacity: '1',
               strokeWidth: '0.265',

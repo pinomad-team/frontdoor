@@ -31,6 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "BUILD_PATH=./build-staging NODE_ENV=staging react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "update-submodules": "git submodule update --init && git submodule update --recursive --remote",

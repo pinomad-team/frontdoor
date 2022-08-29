@@ -19,8 +19,10 @@ export const generateFirebaseTokenHeader = (token: string) => ({
 
 export class PylonRpc implements RpcRequester {
   private pylonWebAPIClient: AxiosInstance;
+  private environment: string;
 
   constructor(headers?: Record<string, any>) {
+    this.environment = process.env.NODE_ENV || 'development';
     this.pylonWebAPIClient = axios.create({
       baseURL: config[process.env.NODE_ENV || 'development'].pylonAPI,
       headers: {
@@ -40,6 +42,7 @@ export class PylonRpc implements RpcRequester {
     >('', {
       service,
       method,
+      environment: this.environment,
       request: Array.from(data),
     });
     return new Uint8Array(axiosResponse.data.response);

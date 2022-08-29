@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "pinomad"
-  }
+  },
+  "targets": {
+    "pinomad": {
+      "hosting": {
+        "production": [
+          "pinomad"
+        ],
+        "staging": [
+          "pinomad-staging"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
