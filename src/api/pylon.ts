@@ -22,9 +22,9 @@ export class PylonRpc implements RpcRequester {
   private environment: string;
 
   constructor(headers?: Record<string, any>) {
-    this.environment = process.env.NODE_ENV || 'development';
+    this.environment = process.env.REACT_APP_ENV || 'development';
     this.pylonWebAPIClient = axios.create({
-      baseURL: config[process.env.NODE_ENV || 'development'].pylonAPI,
+      baseURL: config[process.env.REACT_APP_ENV || 'development'].pylonAPI,
       headers: {
         ...headers,
       },
